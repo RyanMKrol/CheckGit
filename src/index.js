@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import customFunction from './module';
 
-export default customFunction;
+customFunction();
