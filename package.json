@@ -16,6 +16,7 @@
   ],
   "scripts": {
     "build": "npm run lint && shx rm -rf build && ./node_modules/.bin/babel src --out-dir build",
+    "debug": "npm run build && DEBUG=check-git* ./build/index.js",
     "lint": "eslint src/ --ext .js",
     "start": "npm run build && ./build/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
