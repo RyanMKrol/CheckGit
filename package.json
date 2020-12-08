@@ -25,7 +25,10 @@
       "pre-commit": "./scripts/husky"
     }
   },
-  "dependencies": {},
+  "dependencies": {
+    "core-js": "^3.8.1",
+    "noodle-utils": "^3.3.2"
+  },
   "devDependencies": {
     "@babel/cli": "^7.10.4",
     "@babel/core": "^7.10.4",
