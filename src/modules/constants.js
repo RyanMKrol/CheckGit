@@ -2,10 +2,10 @@
 
 import * as utils from 'noodle-utils';
 
-const info = utils.logger('check-git:info');
+const info = utils.logger('pending-pushes:info');
 info.log = console.log.bind(console);
 
-const error = utils.logger('check-git:error');
+const error = utils.logger('pending-pushes:error');
 
 const PATHS_STORAGE_FILENAME = `${__dirname}/../../data/paths.json`;
 

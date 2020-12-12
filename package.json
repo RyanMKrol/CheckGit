@@ -1,22 +1,22 @@
 {
-  "name": "check-git",
+  "name": "pending-pushes",
   "version": "1.0.0",
   "keywords": [],
   "repository": {
     "type": "git",
-    "url": "https://github.com/RyanMKrol/check-git.git"
+    "url": "https://github.com/RyanMKrol/pending-pushes.git"
   },
   "license": "MIT",
   "main": "build/index.js",
   "bin": {
-    "check-git": "./build/index.js"
+    "pending-pushes": "./build/index.js"
   },
   "files": [
     "build"
   ],
   "scripts": {
     "build": "npm run lint && shx rm -rf build && ./node_modules/.bin/babel src --out-dir build",
-    "debug": "npm run build && DEBUG=check-git* ./build/index.js",
+    "debug": "npm run build && DEBUG=pending-pushes* ./build/index.js",
     "lint": "eslint src/ --ext .js",
     "start": "npm run build && ./build/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
