@@ -20,7 +20,7 @@ async function checkPaths() {
     .map((path) => {
       info(`Checking path: ${path}`);
 
-      const result = shell.exec(`git -C ${path} status`, { silent: false });
+      const result = shell.exec(`git -C ${path} status`, { silent: true });
 
       const needsPushing = result.stdout.includes('Your branch is ahead');
 
