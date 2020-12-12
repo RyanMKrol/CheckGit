@@ -1,14 +1,7 @@
-import fs from 'fs';
-import util from 'util';
-import nodePath from 'path';
-
 import { info, error, PATHS_STORAGE_FILENAME } from './constants';
 import readPaths from './read';
-
+import { convertToAbsolute, openFile, writeFile } from './utils';
 import FailedAddition from './errors';
-
-const open = util.promisify(fs.open);
-const writeFile = util.promisify(fs.writeFile);
 
 /**
  * Adds the paths to paths that want to check
@@ -24,7 +17,7 @@ async function addPath(path) {
 
   pathsToWrite.push(absolutePath);
 
-  await open(PATHS_STORAGE_FILENAME, 'w')
+  await openFile(PATHS_STORAGE_FILENAME, 'w')
     .then(async (fd) => {
       info(`Storing paths: ${pathsToWrite}`);
       await writeFile(fd, JSON.stringify(pathsToWrite));
@@ -33,16 +26,6 @@ async function addPath(path) {
       error('Failed to write, with error: %O', e);
       throw new FailedAddition(`Could not open the file for writing ${e.toString()}`);
     });
-}
-
-/**
- * Ensures that the path given to us can be used anywhere
- *
- * @param {string} path The path given to us by the user
- * @returns {string} The absolute path
- */
-function convertToAbsolute(path) {
-  return nodePath.isAbsolute(path) ? path : nodePath.resolve(process.cwd(), path);
 }
 
 export default addPath;

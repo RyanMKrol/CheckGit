@@ -1,10 +1,5 @@
-import fs from 'fs';
-import util from 'util';
-
+import { openFile, readFile } from './utils';
 import { info, error, PATHS_STORAGE_FILENAME } from './constants';
-
-const open = util.promisify(fs.open);
-const readFile = util.promisify(fs.readFile);
 
 /**
  * Reads the paths that are stored locally
@@ -14,7 +9,7 @@ const readFile = util.promisify(fs.readFile);
 async function readPaths() {
   info('Reading the current paths in storage');
 
-  return open(PATHS_STORAGE_FILENAME, 'a+')
+  return openFile(PATHS_STORAGE_FILENAME, 'a+')
     .then(async (fd) => {
       const readData = await readFile(fd);
       const currentPaths = readData.length > 0 ? JSON.parse(readData) : [];
