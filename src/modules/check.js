@@ -1,6 +1,7 @@
 import shell from 'shelljs';
 
-import { info, error } from './constants';
+import { GitMissing } from './errors';
+import { info } from './constants';
 import readPaths from './read';
 
 /**
@@ -10,8 +11,7 @@ import readPaths from './read';
  */
 async function checkPaths() {
   if (!shell.which('git')) {
-    error('Sorry, this script requires git');
-    shell.exit(1);
+    throw new GitMissing('Please install git before using this tool');
   }
 
   const pathsToCheck = await readPaths();

@@ -1,7 +1,7 @@
 import { info, error, PATHS_STORAGE_FILENAME } from './constants';
 import readPaths from './read';
 import { convertToAbsolute, openFile, writeFile } from './utils';
-import FailedAddition from './errors';
+import { FailedAddition } from './errors';
 
 /**
  * Adds the paths to paths that want to check
