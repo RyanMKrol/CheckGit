@@ -5,6 +5,8 @@ import nodePath from 'path';
 import { info, error, PATHS_STORAGE_FILENAME } from './constants';
 import readPaths from './read';
 
+import FailedAddition from './errors';
+
 const open = util.promisify(fs.open);
 const writeFile = util.promisify(fs.writeFile);
 
@@ -29,7 +31,7 @@ async function addPath(path) {
     })
     .catch((e) => {
       error('Failed to write, with error: %O', e);
-      throw new Error(`Could not open the file for writing ${e.toString()}`);
+      throw new FailedAddition(`Could not open the file for writing ${e.toString()}`);
     });
 }
 
