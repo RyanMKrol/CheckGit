@@ -12,7 +12,8 @@
     "pending-pushes": "./build/index.js"
   },
   "files": [
-    "build"
+    "build",
+    "data"
   ],
   "scripts": {
     "build": "npm run lint && shx rm -rf build && ./node_modules/.bin/babel src --out-dir build",
