@@ -3,11 +3,20 @@
 import chalk from 'chalk';
 
 /**
+ * Util for printing when we fail to check paths for unpushed commits
+ *
+ * @param {string} message Error message associated with the failure
+ */
+function printCheckError(message) {
+  console.log(chalk.bold.red(`Failed to check paths for unpushed commits - ${message}`));
+}
+
+/**
  * Util for printing which path needs pushing
  *
  * @param {string} path Path to print
  */
-function printPath(path) {
+function printCheckPath(path) {
   console.log(
     chalk.underline.bold.blue('You have a branch to push')
       + chalk.underline.yellow(' - ')
@@ -48,5 +57,10 @@ function printAddSuccess() {
 }
 
 export {
-  printPath, printRemoveError, printRemoveSuccess, printAddError, printAddSuccess,
+  printCheckError,
+  printCheckPath,
+  printRemoveError,
+  printRemoveSuccess,
+  printAddError,
+  printAddSuccess,
 };
