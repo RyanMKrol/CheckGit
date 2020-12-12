@@ -9,6 +9,7 @@ const readFile = util.promisify(fs.readFile);
 /**
  * Reads the paths that are stored locally
  *
+ * @returns {Array.<string>} Array of paths to check
  */
 async function readPaths() {
   info('Reading the current paths in storage');
