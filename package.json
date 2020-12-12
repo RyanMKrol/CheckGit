@@ -27,8 +27,10 @@
     }
   },
   "dependencies": {
+    "chalk": "^4.1.0",
     "core-js": "^3.8.1",
-    "noodle-utils": "^3.3.2"
+    "noodle-utils": "^3.3.2",
+    "shelljs": "^0.8.4"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.4",
