@@ -3,7 +3,7 @@
  */
 class FailedRemoval extends Error {
   /**
-   * @param {...any} params
+   * @param {...any} params Params to pass to super object
    */
   constructor(...params) {
     // Pass remaining arguments (including vendor specific ones) to parent constructor
