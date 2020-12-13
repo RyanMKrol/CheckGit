@@ -3,6 +3,28 @@ import fs from 'fs';
 import util from 'util';
 
 /**
+ * Method to filter using an async predicate
+ *
+ * @param {Function} predicate Function to determine membership to filter
+ * @param {Array.<any>} list List to filter
+ * @returns {Array.<any>} A filtered list
+ */
+function asyncFilter(predicate, list) {
+  return list.reduce(
+    async (acc, item) => acc.then(async (result) => {
+      const isValid = await predicate(item);
+
+      if (isValid) {
+        result.push(item);
+      }
+
+      return result;
+    }),
+    Promise.resolve([]),
+  );
+}
+
+/**
  * Ensures that the path given to us can be used anywhere
  *
  * @param {string} path The path given to us by the user
@@ -30,6 +52,7 @@ const fileStats = util.promisify(fs.stat);
 const readDir = util.promisify(fs.readdir);
 
 export {
+  asyncFilter,
   convertToAbsolute,
   removeArrayDuplicates,
   openFile,
