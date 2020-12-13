@@ -50,7 +50,7 @@ function printAddError(message) {
  * Util for printing when we succeed in adding an item to storage
  */
 function printAddSuccess() {
-  console.log(chalk.bold.green('Added path successfully!'));
+  console.log(chalk.bold.green('Added path(s) successfully!'));
 }
 
 /**
