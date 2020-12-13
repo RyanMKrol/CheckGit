@@ -4,13 +4,16 @@ import yargs from 'yargs';
 import {
   addPath,
   checkPaths,
+  readPaths,
   removePath,
-  printCheckPath,
+  printCheckSuccess,
   printCheckError,
   printRemoveError,
   printRemoveSuccess,
   printAddError,
   printAddSuccess,
+  printListError,
+  printListSuccess,
 } from './modules';
 
 /**
@@ -33,10 +36,18 @@ async function main() {
       .catch((error) => {
         printRemoveError(error.message);
       });
+  } else if (yargs.argv.list) {
+    readPaths()
+      .then((paths) => {
+        printListSuccess(paths);
+      })
+      .catch((error) => {
+        printListError(error.message);
+      });
   } else {
     checkPaths()
       .then((paths) => {
-        paths.forEach((element) => printCheckPath(element));
+        printCheckSuccess(paths);
       })
       .catch((error) => {
         printCheckError(error.message);

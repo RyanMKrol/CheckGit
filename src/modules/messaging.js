@@ -12,16 +12,16 @@ function printCheckError(message) {
 }
 
 /**
- * Util for printing which path needs pushing
+ * Util for printing which paths needs pushing
  *
- * @param {string} path Path to print
+ * @param {string} paths Paths to print
  */
-function printCheckPath(path) {
-  console.log(
+function printCheckSuccess(paths) {
+  paths.forEach((path) => console.log(
     chalk.underline.bold.blue('You have a branch to push')
-      + chalk.underline.yellow(' - ')
-      + chalk.underline.green(path),
-  );
+        + chalk.underline.yellow(' - ')
+        + chalk.underline.green(path),
+  ));
 }
 
 /**
@@ -56,11 +56,32 @@ function printAddSuccess() {
   console.log(chalk.bold.green('Added path successfully!'));
 }
 
+/**
+ * Util for printing when we fail to list the paths to check
+ *
+ * @param {string} message Any custom error message to write out
+ */
+function printListError(message) {
+  console.log(chalk.bold.red(`Failed to read paths to check - ${message}`));
+}
+
+/**
+ * Util for printing paths when we successfully read them
+ *
+ * @param {Array.<string>} paths Paths to print out
+ */
+function printListSuccess(paths) {
+  console.log(chalk.bold.black('Current paths:'));
+  paths.forEach((path) => console.log(chalk.gray(path)));
+}
+
 export {
   printCheckError,
-  printCheckPath,
+  printCheckSuccess,
   printRemoveError,
   printRemoveSuccess,
   printAddError,
   printAddSuccess,
+  printListError,
+  printListSuccess,
 };
