@@ -27,7 +27,7 @@ async function addPath(path, depth = 0) {
   } else {
     const paths = await findEligiblePaths(absolutePath, depth);
 
-    paths.reduce(
+    await paths.reduce(
       (acc, pathToAdd) => acc.then(async () => {
         await addDirectory(pathToAdd);
       }),
