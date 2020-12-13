@@ -16,19 +16,27 @@ async function checkPaths() {
 
   const pathsToCheck = await readPaths();
 
-  return pathsToCheck
-    .map((path) => {
-      info(`Checking path: ${path}`);
+  return Promise.all(
+    pathsToCheck.map(
+      (path) => new Promise((resolve) => {
+        info(`Checking path: ${path}`);
 
-      const result = shell.exec(`git -C ${path} status`, { silent: true });
+        const result = shell.exec(`git -C ${path} status`, { silent: true, async: true });
 
-      const needsPushing = result.stdout.includes('Your branch is ahead');
+        result.stdout.on('data', (data) => {
+          const needsPushing = data.includes('Your branch is ahead');
 
-      info(`Does this path need pushing?: ${needsPushing ? 'Yes' : 'No'}`);
+          info(`Does this path need pushing?: ${needsPushing ? 'Yes' : 'No'}`);
 
-      return needsPushing ? path : undefined;
-    })
-    .filter((x) => x);
+          if (needsPushing) {
+            resolve(path);
+          } else {
+            resolve();
+          }
+        });
+      }),
+    ),
+  ).then((paths) => paths.filter((x) => x));
 }
 
 export default checkPaths;
