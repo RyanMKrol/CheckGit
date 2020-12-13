@@ -42,6 +42,7 @@ async function addPath(path, depth = 0) {
  * @param {string} path The path to start with
  * @param {number} depth How deep to recurse
  * @param {Array.<string>} accumulator Current accumulator for recursive function
+ * @returns {Array.<string>} The paths to add to this tool for tracking
  */
 async function findEligiblePaths(path, depth, accumulator = []) {
   if (depth === 0) {
@@ -74,7 +75,6 @@ async function findEligiblePaths(path, depth, accumulator = []) {
  * Adds the path to paths that want to check
  *
  * @param {string} path The path of a folder to check when running this tool
- * @param {number} depth How many directories to dig into to find a .git directory
  */
 async function addDirectory(path) {
   info(`Adding this path to list of folders to check: ${path}`);
@@ -123,6 +123,7 @@ async function isDirectoryValid(path) {
  * Determines if the path we're adding has a git folder or not
  *
  * @param {string} path The path to check
+ * @returns {Promise.<boolean>} Whether the path leads to a directory that has a git folder
  */
 function isGitTracked(path) {
   return accessFile(`${path}/.git`, fs.constants.F_OK)
@@ -134,6 +135,7 @@ function isGitTracked(path) {
  * Determines if the directory exists or not
  *
  * @param {string} path The path to check
+ * @returns {Promise.<boolean>} Whether the path leads to a directory that exists
  */
 function directoryExists(path) {
   return accessFile(path, fs.constants.F_OK)
@@ -145,6 +147,7 @@ function directoryExists(path) {
  * Determines if the path points to a directory
  *
  * @param {string} path The path to check
+ * @returns {Promise.<boolean>} Whether the path leads to a directory
  */
 function isDirectory(path) {
   return fileStats(path)
@@ -156,6 +159,7 @@ function isDirectory(path) {
  * Returns whether the path is pointing to a hidden item or not
  *
  * @param {string} path The path to inspect
+ * @returns {boolean} Whether the path leads to a hidden resource
  */
 function isHidden(path) {
   return path.substring(path.lastIndexOf('/') + 1).startsWith('.');
