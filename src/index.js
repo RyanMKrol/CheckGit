@@ -21,7 +21,7 @@ import {
  */
 async function main() {
   if (yargs.argv.add) {
-    addPath(yargs.argv.add)
+    addPath(yargs.argv.add, yargs.argv.depth)
       .then(() => {
         printAddSuccess();
       })
