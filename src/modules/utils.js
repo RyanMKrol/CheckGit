@@ -15,7 +15,8 @@ function convertToAbsolute(path) {
 const openFile = util.promisify(fs.open);
 const writeFile = util.promisify(fs.writeFile);
 const readFile = util.promisify(fs.readFile);
+const accessFile = util.promisify(fs.access);
 
 export {
-  convertToAbsolute, openFile, writeFile, readFile,
+  convertToAbsolute, openFile, writeFile, readFile, accessFile,
 };
