@@ -17,11 +17,8 @@ function printCheckError(message) {
  * @param {string} paths Paths to print
  */
 function printCheckSuccess(paths) {
-  paths.forEach((path) => console.log(
-    chalk.underline.bold.blue('You have a branch to push')
-        + chalk.underline.yellow(' - ')
-        + chalk.underline.green(path),
-  ));
+  console.log(chalk.bold.blue('You have a branches to push:'));
+  paths.forEach((path) => console.log(chalk.red(path)));
 }
 
 /**
