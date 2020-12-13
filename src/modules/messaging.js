@@ -68,8 +68,8 @@ function printListError(message) {
  * @param {Array.<string>} paths Paths to print out
  */
 function printListSuccess(paths) {
-  console.log(chalk.bold.black('Current paths:'));
-  paths.forEach((path) => console.log(chalk.gray(path)));
+  console.log(chalk.bold.yellow('Current paths:'));
+  paths.forEach((path) => console.log(chalk.green(path)));
 }
 
 export {
