@@ -3,7 +3,7 @@ import fs from 'fs';
 import { info, error, PATHS_STORAGE_FILENAME } from './constants';
 import readPaths from './read';
 import {
-  convertToAbsolute, accessFile, openFile, writeFile,
+  convertToAbsolute, accessFile, openFile, writeFile, removeArrayDuplicates,
 } from './utils';
 import { FailedAddition, DirectoryNotFound } from './errors';
 
@@ -32,7 +32,7 @@ async function addPath(path) {
   await openFile(PATHS_STORAGE_FILENAME, 'w')
     .then(async (fd) => {
       info(`Storing paths: ${pathsToWrite}`);
-      await writeFile(fd, JSON.stringify(pathsToWrite));
+      await writeFile(fd, JSON.stringify(removeArrayDuplicates(pathsToWrite)));
     })
     .catch((e) => {
       error('Failed to write, with error: %O', e);

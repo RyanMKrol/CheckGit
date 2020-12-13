@@ -12,11 +12,21 @@ function convertToAbsolute(path) {
   return nodePath.isAbsolute(path) ? path : nodePath.resolve(process.cwd(), path);
 }
 
+/**
+ * Removes duplicates from an array
+ *
+ * @param {Array.<any>} array Any array
+ * @returns {Array.<any>} Any array without duplicates
+ */
+function removeArrayDuplicates(array) {
+  return Array.from(new Set(array));
+}
+
 const openFile = util.promisify(fs.open);
 const writeFile = util.promisify(fs.writeFile);
 const readFile = util.promisify(fs.readFile);
 const accessFile = util.promisify(fs.access);
 
 export {
-  convertToAbsolute, openFile, writeFile, readFile, accessFile,
+  convertToAbsolute, removeArrayDuplicates, openFile, writeFile, readFile, accessFile,
 };
