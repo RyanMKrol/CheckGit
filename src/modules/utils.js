@@ -26,7 +26,16 @@ const openFile = util.promisify(fs.open);
 const writeFile = util.promisify(fs.writeFile);
 const readFile = util.promisify(fs.readFile);
 const accessFile = util.promisify(fs.access);
+const fileStats = util.promisify(fs.stat);
+const readDir = util.promisify(fs.readdir);
 
 export {
-  convertToAbsolute, removeArrayDuplicates, openFile, writeFile, readFile, accessFile,
+  convertToAbsolute,
+  removeArrayDuplicates,
+  openFile,
+  writeFile,
+  readFile,
+  accessFile,
+  fileStats,
+  readDir,
 };

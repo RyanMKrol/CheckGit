@@ -3,12 +3,17 @@ import fs from 'fs';
 import { info, error, PATHS_STORAGE_FILENAME } from './constants';
 import readPaths from './read';
 import {
-  convertToAbsolute, accessFile, openFile, writeFile, removeArrayDuplicates,
+  convertToAbsolute,
+  accessFile,
+  openFile,
+  writeFile,
+  removeArrayDuplicates,
+  fileStats,
 } from './utils';
 import { FailedAddition, DirectoryNotFound } from './errors';
 
 /**
- * Adds the paths to paths that want to check
+ * Adds the path to paths that want to check
  *
  * @param {string} path The path of a folder to check when running this tool
  */
@@ -19,6 +24,10 @@ async function addPath(path) {
 
   if (!(await directoryExists(absolutePath))) {
     throw new DirectoryNotFound(`Could not find directory - ${absolutePath}`);
+  }
+
+  if (!(await isDirectory(absolutePath))) {
+    throw new DirectoryNotFound(`Provided path does not point to directory - ${absolutePath}`);
   }
 
   if (!(await isGitTracked(absolutePath))) {
@@ -59,6 +68,17 @@ function isGitTracked(path) {
 function directoryExists(path) {
   return accessFile(path, fs.constants.F_OK)
     .then(() => 1)
+    .catch(() => 0);
+}
+
+/**
+ * Determines if the path points to a directory
+ *
+ * @param {string} path The path to check
+ */
+function isDirectory(path) {
+  return fileStats(path)
+    .then((stats) => stats.isDirectory())
     .catch(() => 0);
 }
 
